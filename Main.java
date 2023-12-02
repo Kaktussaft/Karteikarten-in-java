@@ -3,15 +3,18 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.stream.Stream;
 
-import org.junit.jupiter.params.provider.Arguments;
+import javax.swing.SwingUtilities;
 
-public class Main {
-    Kartei kartei = new Kartei();
+
+
+public class Main extends Application{
+   
+
     Freund freund = new Freund(null, null, null, null);
-
+    Kartei kartei = new Kartei();
     public static boolean running = true;
+    
 
     static String temp_Vorname;
     static String temp_Nachname;
@@ -24,6 +27,12 @@ public class Main {
 
     public static void main(String[] args) {
 
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                new FlashcardAppGUI().setVisible(true);
+            }
+        });
+
         while (running = true) {
 
             switch (Handlungsoptionen()) {
@@ -34,7 +43,8 @@ public class Main {
                     break;
 
                     case 2:
-                    System.out.println("Füge einen Freund hinzu: 1");
+                    Freund foundFriend = Kartei.suchFreund(Option_2());
+                    System.out.println(foundFriend);
                     break;
 
                     case 3:
@@ -54,7 +64,9 @@ public class Main {
 
     }
 
+ 
     public static int Handlungsoptionen() {
+     
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Es gibt die folgenden Optionen: ");
@@ -72,7 +84,7 @@ public class Main {
             eingabe = scanner.nextInt();
         }
         return eingabe;
-
+    
     }
 
         public static Freund Option_1(String Vorname, String Nachname, LocalDate Geburtstag, String Strasse, String Hausnummer, String PLZ, String Stadt, String Land) {
@@ -83,9 +95,12 @@ public class Main {
         return newFreund;
     }
 
-    // public static Freund Option_2() {
-    // new Freund(null, null, null, null);
-    // }
+    public static String Option_2() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Bitte geben Sie den Vor- oder Nachnamen des Freundes ein:");
+        String name = scanner.nextLine();
+        return name;
+    }
 
     // public static Freund Option_3() {
     // new Freund(null, null, null, null);
