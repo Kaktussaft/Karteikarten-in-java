@@ -6,15 +6,11 @@ import java.util.Scanner;
 
 import javax.swing.SwingUtilities;
 
-
-
-public class Main extends Application{
-   
+public class Main extends FlashcardAppGUI {
 
     Freund freund = new Freund(null, null, null, null);
     Kartei kartei = new Kartei();
     public static boolean running = true;
-    
 
     static String temp_Vorname;
     static String temp_Nachname;
@@ -26,6 +22,12 @@ public class Main extends Application{
     static String temp_Land;
 
     public static void main(String[] args) {
+
+        Option_1("John", "Doe", LocalDate.of(1990, 1, 1), "Street1", "1A", "12345", "City1", "Country1");
+        Option_1("Jane", "Doe", LocalDate.of(1992, 2, 2), "Street2", "2B", "23456", "City2", "Country2");
+        Option_1("Alice", "Smith", LocalDate.of(1994, 3, 3), "Street3", "3C", "34567", "City3", "Country3");
+        Option_1("Bob", "Johnson", LocalDate.of(1996, 4, 4), "Street4", "4D", "45678", "City4", "Country4");
+        Option_1("Charlie", "Brown", LocalDate.of(1998, 6, 5), "Street5", "5E", "56789", "City5", "Country5");
 
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
@@ -39,19 +41,20 @@ public class Main extends Application{
                 case 1:
                     Get_user_input_Name();
                     Get_user_input_Adresse();
-                    Option_1(temp_Vorname, temp_Nachname, temp_Geburtstag, temp_Strasse, temp_Hausnummer, temp_PLZ, temp_Stadt, temp_Land);
+                    Option_1(temp_Vorname, temp_Nachname, temp_Geburtstag, temp_Strasse, temp_Hausnummer, temp_PLZ,
+                            temp_Stadt, temp_Land);
                     break;
 
-                    case 2:
+                case 2:
                     Freund foundFriend = Kartei.suchFreund(Option_2());
                     System.out.println(foundFriend);
                     break;
 
-                    case 3:
+                case 3:
                     System.out.println("Füge einen Freund hinzu: 1");
                     break;
 
-                    case 4:
+                case 4:
                     Freund foundFreund = Kartei.suchFreund(Option_4());
                     System.out.println(foundFreund);
                     break;
@@ -64,9 +67,8 @@ public class Main extends Application{
 
     }
 
- 
     public static int Handlungsoptionen() {
-     
+
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Es gibt die folgenden Optionen: ");
@@ -77,17 +79,19 @@ public class Main extends Application{
         System.out.println("Zeige alle Freunde an: 5");
 
         Integer eingabe = scanner.nextInt();
-        // catch all User inputs that are not integers 1-5 and prompt the user to try again
-        
+        // catch all User inputs that are not integers 1-5 and prompt the user to try
+        // again
+
         while (eingabe < 1 || eingabe > 5) {
             System.out.println("Bitte geben Sie eine Zahl zwischen 1 und 5 ein.");
             eingabe = scanner.nextInt();
         }
         return eingabe;
-    
+
     }
 
-        public static Freund Option_1(String Vorname, String Nachname, LocalDate Geburtstag, String Strasse, String Hausnummer, String PLZ, String Stadt, String Land) {
+    public static Freund Option_1(String Vorname, String Nachname, LocalDate Geburtstag, String Strasse,
+            String Hausnummer, String PLZ, String Stadt, String Land) {
         Adresse newAdresse = new Adresse(temp_Strasse, temp_Hausnummer, temp_PLZ, temp_Stadt, temp_Land);
         ArrayList<Adresse> adressenList = new ArrayList<>();
         adressenList.add(newAdresse);
@@ -139,8 +143,9 @@ public class Main extends Application{
         }
         return date;
     }
+
     public static void Get_user_input_Name() {
-       
+
         temp_Vorname = promptForNonEmptyInput("Bitte geben Sie den Vornamen ein:");
         temp_Nachname = promptForNonEmptyInput("Bitte geben Sie den Nachnamen ein:");
         temp_Geburtstag = promptForDate("Bitte geben Sie das Geburtsdatum ein: 'dd.MM.yyyy'");
@@ -153,7 +158,5 @@ public class Main extends Application{
         temp_Stadt = promptForNonEmptyInput("Bitte geben Sie die Stadt ein:");
         temp_Land = promptForNonEmptyInput("Bitte geben Sie das Land ein:");
     }
-
-    
 
 }
