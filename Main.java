@@ -90,13 +90,13 @@ public class Main extends FlashcardAppGUI {
 
     }
 
-    public static Freund Option_1(String Vorname, String Nachname, LocalDate Geburtstag, String Strasse,
+    //Freund hinzufügen
+    public static void Option_1(String Vorname, String Nachname, LocalDate Geburtstag, String Strasse,
             String Hausnummer, String PLZ, String Stadt, String Land) {
-        Adresse newAdresse = new Adresse(temp_Strasse, temp_Hausnummer, temp_PLZ, temp_Stadt, temp_Land);
+        Adresse newAdresse = new Adresse(Strasse, Hausnummer, PLZ, Stadt, Land);
         ArrayList<Adresse> adressenList = new ArrayList<>();
         adressenList.add(newAdresse);
-        Freund newFreund = new Freund(temp_Vorname, temp_Nachname, temp_Geburtstag, adressenList);
-        return newFreund;
+        Freund newFreund = new Freund(Vorname, Nachname, Geburtstag, adressenList); //New friend object is created in the constructor        
     }
 
     public static String Option_2() {
