@@ -27,9 +27,12 @@ public class FlashcardAppGUI extends JFrame {
         friendListPanel.add(friendListLabel, BorderLayout.NORTH);
         friendListPanel.add(friendListScrollPane, BorderLayout.CENTER);
 
+        // Create the label for the search field
+        JLabel searchLabel = new JLabel("Suche Freund");
+    
         // Create the search field and add functionality to it
-        JTextField searchField = new JTextField(20);
-        searchField.addActionListener(new ActionListener() {
+        JTextField searchField = new JTextField();
+            searchField.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String name = searchField.getText();
                 Freund freund = Kartei.suchFreund(name);
@@ -41,20 +44,23 @@ public class FlashcardAppGUI extends JFrame {
             }
         });
 
-        // Create the label for the search field
-        JLabel searchLabel = new JLabel("Suche Freund");
+        // Create a panel to hold the search label and search field
+        JPanel searchPanel = new JPanel();
+        searchPanel.setLayout(new BoxLayout(searchPanel, BoxLayout.Y_AXIS));
+        searchPanel.add(searchLabel);
+        searchPanel.add(searchField);
 
         // Create the friend info area
         friendInfo = new JTextArea();
         friendInfo.setEditable(false);
 
-        // Create a panel to hold the search field, search label, and friend info area
+        // Create a panel to hold the search panel and friend info area
         JPanel inputAndEditPanel = new JPanel(new BorderLayout());
-        inputAndEditPanel.add(searchLabel, BorderLayout.NORTH);
-        inputAndEditPanel.add(searchField, BorderLayout.CENTER);
-        inputAndEditPanel.add(new JScrollPane(friendInfo), BorderLayout.SOUTH);
+        inputAndEditPanel.add(searchPanel, BorderLayout.NORTH);
+        inputAndEditPanel.add(new JScrollPane(friendInfo), BorderLayout.CENTER);
 
-        // Create the split pane and add the friend list panel and input/edit panel to it
+        // Create the split pane and add the friend list panel and input/edit panel to
+        // it
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, friendListPanel, inputAndEditPanel);
         splitPane.setDividerLocation(200); // Set the initial divider location
 
