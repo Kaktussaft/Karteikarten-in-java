@@ -2,6 +2,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import javax.swing.SwingUtilities;
@@ -36,6 +37,7 @@ public class Main extends FlashcardAppGUI {
         });
 
         while (running = true) {
+            List<Freund> foundFriends = new ArrayList<>();// initialize foundFriends
 
             switch (Handlungsoptionen()) {
                 case 1:
@@ -46,8 +48,10 @@ public class Main extends FlashcardAppGUI {
                     break;
 
                 case 2:
-                    Freund foundFriend = Kartei.suchFreund(Option_2());
-                    System.out.println(foundFriend);
+                     foundFriends = Kartei.suchFreunde(Option_2());
+                    for (Freund friend : foundFriends) {
+                        System.out.println(friend);
+                    }
                     break;
 
                 case 3:
@@ -55,8 +59,10 @@ public class Main extends FlashcardAppGUI {
                     break;
 
                 case 4:
-                    Freund foundFreund = Kartei.suchFreund(Option_4());
-                    System.out.println(foundFreund);
+                    foundFriends = Kartei.suchFreunde(Option_2());
+                    for (Freund friend : foundFriends) {
+                        System.out.println(friend);
+                    }
                     break;
 
                 case 5:
@@ -90,13 +96,14 @@ public class Main extends FlashcardAppGUI {
 
     }
 
-    //Freund hinzufügen
+    // Freund hinzufügen
     public static void Option_1(String Vorname, String Nachname, LocalDate Geburtstag, String Strasse,
             String Hausnummer, String PLZ, String Stadt, String Land) {
         Adresse newAdresse = new Adresse(Strasse, Hausnummer, PLZ, Stadt, Land);
         ArrayList<Adresse> adressenList = new ArrayList<>();
         adressenList.add(newAdresse);
-        Freund newFreund = new Freund(Vorname, Nachname, Geburtstag, adressenList); //New friend object is created in the constructor        
+        Freund newFreund = new Freund(Vorname, Nachname, Geburtstag, adressenList); // New friend object is created in
+                                                                                    // the constructor
     }
 
     public static String Option_2() {
