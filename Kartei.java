@@ -18,14 +18,14 @@ public class Kartei {
     // return new freund();
     // }
 
-    public static Freund suchFreund(String name)
-    {
+    public static List<Freund> suchFreunde(String name) {
+        List<Freund> freunde = new ArrayList<>();
         for (Freund freund : freundListe) {
             if (freund.Vorname.equals(name) || freund.Nachname.equals(name)) {
-                return freund;
+                freunde.add(freund);
             }
         }
-        return null;
+        return freunde;
     }
     // public Freund_anzeigen(Freund freund)
     // {
