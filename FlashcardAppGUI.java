@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List; // Add this import statement
 
 public class FlashcardAppGUI extends JFrame {
     private JTextArea friendInfo;
@@ -29,15 +30,22 @@ public class FlashcardAppGUI extends JFrame {
 
         // Create the label for the search field
         JLabel searchLabel = new JLabel("Suche Freund");
-    
-        // Create the search field and add functionality to it
+
+        
+
+        // Declare and initialize the searchField variable this function will return the friend objects
+        // and multiple off them if they are present
         JTextField searchField = new JTextField();
-            searchField.addActionListener(new ActionListener() {
+        searchField.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String name = searchField.getText();
-                Freund freund = Kartei.suchFreund(name);
-                if (freund != null) {
-                    friendInfo.setText(freund.toString());
+                List<Freund> freunde = Kartei.suchFreunde(name);
+                if (!freunde.isEmpty()) {
+                    StringBuilder sb = new StringBuilder();
+                    for (Freund freund : freunde) {
+                        sb.append(freund.toString()).append("\n");
+                    }
+                    friendInfo.setText(sb.toString());
                 } else {
                     friendInfo.setText("Kein Freund gefunden mit Name: " + name);
                 }
@@ -69,5 +77,6 @@ public class FlashcardAppGUI extends JFrame {
 
         // Set the size of the frame
         setSize(1000, 700);
+
     }
 }
