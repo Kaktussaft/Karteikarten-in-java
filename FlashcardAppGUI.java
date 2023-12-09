@@ -31,11 +31,11 @@ public class FlashcardAppGUI extends JFrame {
         // Create the label for the search field
         JLabel searchLabel = new JLabel("Suche Freund");
 
-        
-
-        // Declare and initialize the searchField variable this function will return the friend objects
+        // Declare and initialize the searchField variable this function will return the
+        // friend objects
         // and multiple off them if they are present
-        JTextField searchField = new JTextField();
+
+                JTextField searchField = new JTextField();
         searchField.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String name = searchField.getText();
@@ -43,7 +43,17 @@ public class FlashcardAppGUI extends JFrame {
                 if (!freunde.isEmpty()) {
                     StringBuilder sb = new StringBuilder();
                     for (Freund freund : freunde) {
-                        sb.append(freund.toString()).append("\n");
+                        sb.append(freund.Vorname.toString()).append("\n");
+                        sb.append(freund.Nachname.toString()).append("\n");
+                        sb.append(freund.Geburtsdatum.toString()).append("\n");
+                        for (Adresse adresse : freund.Adressen) {
+                            sb.append(adresse.Strasse.toString()).append("\n");
+                            sb.append(adresse.Hausnummer.toString()).append("\n");
+                            sb.append(adresse.PLZ.toString()).append("\n");
+                            sb.append(adresse.Stadt.toString()).append("\n");
+                            sb.append(adresse.Land.toString()).append("\n");
+                        }
+                        
                     }
                     friendInfo.setText(sb.toString());
                 } else {
