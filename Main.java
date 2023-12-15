@@ -22,6 +22,7 @@ public class Main {
 
     public static void main(String[] args) {
 
+        //Seed Daten um zu testen
         Option_1("John", "Doe", LocalDate.of(1990, 1, 1), "Street1", "1A", "12345", "City1", "Country1");
         Option_1("Jane", "Doe", LocalDate.of(1992, 2, 2), "Street2", "2B", "23456", "City2", "Country2");
         Option_1("Alice", "Smith", LocalDate.of(1994, 3, 3), "Street3", "3C", "34567", "City3", "Country3");
@@ -96,15 +97,9 @@ public class Main {
                     break;
 
                     case 5: //Alle Freunde anzeigen
-                    System.out.println("\n");
-                    System.out.println("Anzahl Freunde: " + Freund.Freund_Liste.size() );
-                    for (Freund freund : Freund.Freund_Liste) {
-                        System.out.println(freund.Vorname + " " + freund.Nachname + " " + freund.Geburtsdatum);
-
-                        Print_Out_Adresses(freund);
-                        System.out.println("\n");
-                    }
-                    break;
+                    Option_5();
+                     break;
+                   
             }
         }
 
@@ -147,7 +142,8 @@ public class Main {
 
     public static String Option_2() {
         
-        return promptForNonEmptyInput("Bitte geben Sie den Namen des Freundes ein:");
+        var freund_name = promptForNonEmptyInput("Bitte geben Sie den Namen des Freundes ein:");
+         return freund_name; 
     }
     
 
@@ -158,6 +154,19 @@ public class Main {
         System.out.println("Bitte geben Sie den Namen des Freundes ein:");
         String name = scanner.nextLine();
         return name;
+    }
+
+    public static void Option_5()
+    {
+         System.out.println("\n");
+                    System.out.println("Anzahl Freunde: " + Freund.Freund_Liste.size() );
+                    for (Freund freund : Freund.Freund_Liste) {
+                        System.out.println(freund.Vorname + " " + freund.Nachname + " " + freund.Geburtsdatum);
+
+                        Print_Out_Adresses(freund);
+                        System.out.println("\n");
+                    }
+                   
     }
 
     //make sure the user does not enter an empty string
@@ -209,8 +218,7 @@ public class Main {
     public static void Print_Out_Adresses(Freund freund) { //print out multiple adresses and don't throw and error if there are none
         if(freund.Adressen.size() > 0){
             for (Adresse adresse : freund.Adressen){
-                System.out.println(adresse.Strasse + " " + adresse.Hausnummer
-                        + ", " + adresse.Stadt + ", " + adresse.Land);
+                System.out.println(adresse.Strasse + " " + adresse.Hausnummer+ " " + adresse.PLZ  + ", " + adresse.Stadt + ", " + adresse.Land);
             }
         }
     }

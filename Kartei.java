@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Scanner;
 
 public class Kartei {
 
@@ -46,12 +47,27 @@ public class Kartei {
 
     public static List<Freund> suchFreunde(String name) {
         List<Freund> freunde = new ArrayList<>();
-        for (Freund freund : freundListe) {
-            if (freund.Vorname.equals(name) || freund.Nachname.equals(name)) {
-                freunde.add(freund);
+        Scanner scanner = new Scanner(System.in);
+    
+        while (freunde.isEmpty()) {
+            for (Freund freund : freundListe) {
+                if (freund.Vorname.equals(name) || freund.Nachname.equals(name)) {
+                    freunde.add(freund);
+                }
+            }
+    
+            if (freunde.isEmpty()) {
+                System.out.println("Es wurde kein Freund mit diesem Namen gefunden. Bitte versuchen Sie es erneut. Oder geben Sie 'exit' ein, um zum Hauptmenü zurückzukehren.");
+                name = scanner.nextLine();
+    
+                if ("exit".equalsIgnoreCase(name)) {
+                    break;
+                }
             }
         }
+    
         return freunde;
     }
+    
 
 }
